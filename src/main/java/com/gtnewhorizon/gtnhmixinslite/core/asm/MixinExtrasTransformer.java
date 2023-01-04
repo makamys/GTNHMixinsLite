@@ -42,7 +42,7 @@ public class MixinExtrasTransformer implements IClassTransformer {
 
         public static final Remapper INSTANCE = new SpongepoweredASMRemapper();
 
-        boolean doRemap;
+        private boolean doRemap;
 
         private static final String GTNHMIXINS_ASM_PACKAGE_PREFIX = "org/spongepowered/libraries/org/objectweb/asm/";
         private static final String GASSTATION_ASM_PACKAGE_PREFIX = "org/spongepowered/asm/lib/";
