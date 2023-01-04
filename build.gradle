@@ -86,23 +86,6 @@ repositories {
 }
 
 dependencies {
-    repackMixin("org.spongepowered:mixin:$mixinVersion")
-    repackMixin("com.github.LlamaLad7:MixinExtras:$mixinExtrasVersion")
-    repackMixin("org.ow2.asm:asm-tree:$asmVersion")
-    repackMixin("org.ow2.asm:asm-commons:$asmVersion")
-    repackMixin("org.ow2.asm:asm-util:$asmVersion")
-    repackMixin("com.google.guava:guava:21.0")
-
-    repackMixinSources("org.spongepowered:mixin:$mixinVersion:sources")
-    repackMixinSources("com.github.LlamaLad7:MixinExtras:$mixinExtrasVersion:sources")
-    repackMixinSources("org.ow2.asm:asm-tree:$asmVersion:sources")
-    repackMixinSources("org.ow2.asm:asm-commons:$asmVersion:sources")
-    repackMixinSources("org.ow2.asm:asm-util:$asmVersion:sources")
-    repackMixinSources("com.google.guava:guava:21.0:sources")
-
-    repackMixinProcessor("com.github.LlamaLad7:MixinExtras:$mixinExtrasVersion")
-    repackMixinProcessor("org.spongepowered:mixin:$mixinVersion:processor")
-
     implementation name: "mixin-$mixinVersion-repack"
     annotationProcessor name: "mixin-$mixinVersion-processor-repack"
 }
@@ -117,59 +100,6 @@ task copySrgs(type: Copy, dependsOn: 'genSrgs') {
     from plugins.getPlugin("forge").delayedFile('{SRG_DIR}')
     include '**/*.srg'
     into 'build/srgs'
-}
-
-// Execute for generate mixin repack jar
-task repackMixinJar(type: ShadowJar) {
-    destinationDirectory.set(layout.projectDirectory.dir('dependencies'))
-    archiveFileName.set("mixin-$mixinVersion-repack.jar")
-    configurations = [project.configurations.repackMixin]
-
-    mergeServiceFiles()
-
-    exclude 'META-INF/MANIFEST.MF', 'META-INF/maven/**', 'META-INF/*.RSA', 'META-INF/*.SF'
-    exclude '**/module-info.class'
-
-    relocate 'org.objectweb.asm', 'org.spongepowered.libraries.org.objectweb.asm'
-    relocate 'com.llamalad7.mixinextras', 'com.gtnewhorizon.mixinextras'
-    relocate 'com.google.common', 'org.spongepowered.libraries.com.google.common'
-    relocate 'com.google.thirdparty.publicsuffix', 'org.spongepowered.libraries.com.google.thirdparty.publicsuffix'
-}
-
-// Execute for generate mixin sources repack jar
-task repackMixinSourcesJar(type: ShadowJar) {
-    destinationDirectory.set(layout.projectDirectory.dir('dependencies'))
-    archiveFileName.set("mixin-$mixinVersion-sources-repack.jar")
-    configurations = [project.configurations.repackMixinSources]
-
-    mergeServiceFiles()
-
-    exclude 'META-INF/MANIFEST.MF', 'META-INF/maven/**', 'META-INF/*.RSA', 'META-INF/*.SF'
-    exclude '**/module-info.class'
-
-    relocate 'org.objectweb.asm', 'org.spongepowered.libraries.org.objectweb.asm'
-    relocate 'com.llamalad7.mixinextras', 'com.gtnewhorizon.mixinextras'
-    relocate 'com.google.common', 'org.spongepowered.libraries.com.google.common'
-    relocate 'com.google.thirdparty.publicsuffix', 'org.spongepowered.libraries.com.google.thirdparty.publicsuffix'
-}
-
-// Execute for generate mixin annotation processor repack jar
-task repackMixinProcessorJar(type: ShadowJar) {
-    destinationDirectory.set(layout.projectDirectory.dir('dependencies'))
-    archiveFileName.set("mixin-$mixinVersion-processor-repack.jar")
-    configurations = [project.configurations.repackMixinProcessor]
-
-    mergeServiceFiles()
-
-    exclude 'META-INF/MANIFEST.MF', 'META-INF/maven/**', 'META-INF/*.RSA', 'META-INF/*.SF'
-    exclude '**/module-info.class'
-
-    relocate 'org.objectweb.asm', 'org.spongepowered.libraries.org.objectweb.asm'
-    relocate 'com.llamalad7.mixinextras', 'com.gtnewhorizon.mixinextras'
-    relocate 'com.google.common', 'org.spongepowered.libraries.com.google.common'
-    relocate 'com.google.gson', 'org.spongepowered.libraries.com.google.gson'
-    relocate 'org.apache.logging.log4j', 'org.spongepowered.libraries.org.apache.logging.log4j'
-    relocate 'com.google.thirdparty.publicsuffix', 'org.spongepowered.libraries.com.google.thirdparty.publicsuffix'
 }
 
 compileJava {
@@ -195,34 +125,6 @@ jar {
                 "ForceLoadAsMod"             : true
         ])
     }
-
-    from(zipTree(layout.projectDirectory.file("dependencies/mixin-$mixinVersion-repack.jar"))) {
-        exclude "META-INF/*.RSA", "META-INF/*.SF", "META-INF/*.MF"
-        exclude "META-INF/services/*.Processor"
-        // Replaced by local classes
-        exclude "org/spongepowered/asm/bridge/**"
-    }
-}
-
-task annotationProcessorJar(type: Jar, dependsOn: classes) {
-    classifier = 'processor'
-    from(sourceSets.main.output) {
-        include 'META-INF/services/javax.annotation.processing.Processor'
-    }
-    from(zipTree(layout.projectDirectory.file("dependencies/mixin-$mixinVersion-processor-repack.jar"))) {
-        exclude 'LICENSE.txt'
-    }
-}
-
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
-    from sourceSets.main.allJava
-    from(zipTree(layout.projectDirectory.file("dependencies/mixin-$mixinVersion-sources-repack.jar"))) {
-        exclude 'LICENSE.txt'
-        exclude 'META-INF/services/*.Processor'
-        // Replaced by custom classes
-        exclude 'org/spongepowered/asm/bridge/**'
-    }
 }
 
 
@@ -246,11 +148,6 @@ processResources {
     }
 }
 
-artifacts {
-    archives annotationProcessorJar
-    archives sourcesJar
-}
-
 
 publishing {
     publications {
@@ -261,12 +158,6 @@ publishing {
 
             artifact(jar) {
                 builtBy jar
-            }
-            artifact(annotationProcessorJar) {
-                builtBy annotationProcessorJar
-            }
-            artifact(sourcesJar) {
-                builtBy sourcesJar
             }
         }
     }
