@@ -141,6 +141,11 @@ processResources {
         // replace version and mcversion
         expand 'version': project.version, 'mcversion': project.minecraft.version, 'modId': project.modId
     }
+    
+    // replace stuff in mcmod.info, nothing else
+    from(file(".")) {
+        include 'README.md'
+    }
 
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {

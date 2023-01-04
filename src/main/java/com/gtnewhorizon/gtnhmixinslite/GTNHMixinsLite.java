@@ -25,7 +25,7 @@ public class GTNHMixinsLite {
         }
         
         if(!missingComponents.isEmpty()) {
-            LOGGER.error("Missing components were detected: " + missingComponents);
+            LOGGER.error("The following missing components were detected: " + missingComponents);
             LOGGER.error("Please obtain mods which provide them. See the readme inside the mod jar or the mod's GitHub page for more details.");
             throw new RuntimeException("Missing components detected");
         }
