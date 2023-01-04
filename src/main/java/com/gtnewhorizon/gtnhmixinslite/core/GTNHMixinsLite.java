@@ -1,13 +1,16 @@
-package com.gtnewhorizon.gtnhmixinslite;
+package com.gtnewhorizon.gtnhmixinslite.core;
 
 import static com.gtnewhorizon.gtnhmixins.core.GTNHMixinsCore.LOGGER;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.launchwrapper.Launch;
+
 public class GTNHMixinsLite {
 
     public static void init() {
+        Launch.classLoader.registerTransformer("com.gtnewhorizon.gtnhmixinslite.core.asm.MixinExtrasTransformer");
         checkComponentIntegrity();
     }
 
@@ -28,7 +31,7 @@ public class GTNHMixinsLite {
         }
     }
 
-    private static boolean classExists(String string) {
+    public static boolean classExists(String string) {
         return GTNHMixinsLite.class.getResource("/" + string.replaceAll("\\.", "/") + ".class") != null;
     }
     

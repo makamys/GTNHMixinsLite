@@ -3,8 +3,8 @@ package com.gtnewhorizon.gtnhmixins.core;
 import com.google.common.collect.ImmutableMap;
 import com.gtnewhorizon.gtnhmixins.IEarlyMixinLoader;
 import com.gtnewhorizon.gtnhmixins.Reflection;
+import com.gtnewhorizon.gtnhmixinslite.core.GTNHMixinsLite;
 import com.gtnewhorizon.mixinextras.MixinExtrasBootstrap;
-import com.gtnewhorizon.gtnhmixinslite.GTNHMixinsLite;
 
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import net.minecraft.launchwrapper.Launch;
