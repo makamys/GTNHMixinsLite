@@ -3,6 +3,8 @@ package com.gtnewhorizon.gtnhmixins.core;
 import com.google.common.collect.ImmutableMap;
 import com.gtnewhorizon.gtnhmixins.IEarlyMixinLoader;
 import com.gtnewhorizon.gtnhmixins.Reflection;
+import com.gtnewhorizon.gtnhmixinslite.GTNHMixinsLite;
+
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import net.minecraft.launchwrapper.Launch;
 import org.apache.logging.log4j.LogManager;
@@ -35,6 +37,8 @@ public class GTNHMixinsCore implements IFMLLoadingPlugin {
 
     static {
         LOGGER.info("Initializing GTNHMixins Core");
+        
+        GTNHMixinsLite.init();
     }
     
     @Override
