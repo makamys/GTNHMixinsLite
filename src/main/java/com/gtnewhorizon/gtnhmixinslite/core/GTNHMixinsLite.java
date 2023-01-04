@@ -21,6 +21,7 @@ public class GTNHMixinsLite {
 
         List<String> missingComponents = new ArrayList<>();
         
+        // This is actually redundant; without Mixin, the mod can't even load since its tweaker class is missing
         if(!classExists("org.spongepowered.asm.launch.MixinBootstrap")) {
             missingComponents.add("Mixin");
         }
