@@ -15,6 +15,10 @@ public class GTNHMixinsLite {
     }
 
     private static void checkComponentIntegrity() {
+        if(Boolean.parseBoolean(System.getProperty("gtnhmixinslite.skipIntegrityChecks", "false"))) {
+            return;
+        }
+
         List<String> missingComponents = new ArrayList<>();
         
         if(!classExists("org.spongepowered.asm.launch.MixinBootstrap")) {
