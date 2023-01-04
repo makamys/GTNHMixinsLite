@@ -1,8 +1,8 @@
 [
   {
     "modid": "${modId}",
-    "name": "GTNHMixins",
-    "description": "GTNH flavored mixins",
+    "name": "GTNHMixinsLite",
+    "description": "GTNH flavored mixins, but only the flavoring. (Use with a Mixin 0.8 bootstrap mod of your choice.)",
     "version": "${version}",
     "mcversion": "${mcversion}",
     "url": "https://github.com/GTNewHorizons/gtnhmixins",

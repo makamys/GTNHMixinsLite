@@ -36,7 +36,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 version = "2.1.4"
 group = "com.gtnewhorizon" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "gtnhmixins"
+archivesBaseName = "gtnhmixinslite"
 
 configurations {
     repackMixin
