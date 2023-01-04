@@ -20,9 +20,6 @@ public class GTNHMixinsLite {
         if(!classExists("ru.timeconqueror.spongemixins.SpongeMixins")) {
             missingComponents.add("SpongeMixins");
         }
-        if(!classExists("com.llamalad7.mixinextras.MixinExtrasBootstrap") || classExists("com.gtnewhorizon.mixinextras.MixinExtrasBootstrap")) {
-            missingComponents.add("MixinExtras");
-        }
         
         if(!missingComponents.isEmpty()) {
             LOGGER.error("The following missing components were detected: " + missingComponents);
