@@ -86,15 +86,15 @@ repositories {
 }
 
 dependencies {
+    implementation("org.spongepowered:mixin:$mixinVersion")
     repackMixin("com.github.LlamaLad7:MixinExtras:$mixinExtrasVersion")
 
     repackMixinSources("com.github.LlamaLad7:MixinExtras:$mixinExtrasVersion:sources")
 
     repackMixinProcessor("com.github.LlamaLad7:MixinExtras:$mixinExtrasVersion")
-	
-	implementation("org.spongepowered:mixin:$mixinVersion")
-    implementation name: "mixin-$mixinVersion-repack"
     annotationProcessor("org.spongepowered:mixin:$mixinVersion:processor")
+	
+    implementation name: "mixin-$mixinVersion-repack"
     annotationProcessor name: "mixin-$mixinVersion-processor-repack"
 }
 
@@ -231,7 +231,6 @@ processResources {
         expand 'version': project.version, 'mcversion': project.minecraft.version, 'modId': project.modId
     }
     
-    // replace stuff in mcmod.info, nothing else
     from(file(".")) {
         include 'README.md'
     }
