@@ -1,3 +1,7 @@
+**This project has been superseded by [UniMixins](https://github.com/LegacyModdingMC/UniMixins) (specifically, its GTNHMixins module).**
+
+---
+
 # GTNH Mixins Lite
 
 This is [GTNHMixins](https://github.com/GTNewHorizons/GTNHMixins) stripped down to only contain its own additions. The embedded Mixin and SpongeMixins have been removed. This makes the mod usable in more configurations (notably, **it can be used alongside [GasStation](https://github.com/FalsePattern/GasStation)**.)
